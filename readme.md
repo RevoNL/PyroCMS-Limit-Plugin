@@ -24,6 +24,6 @@ Output:
 	
 ## Parameters
 
-Words		The number of words you want to show
-Ending		Custom ending append to the end of the text. Default = "..."
-Strip		Set "yes" to strip all HTML tags.
+Words  -  The number of words you want to show<br>
+Ending  -  Custom ending append to the end of the text. Default = "..."<br>
+Strip  -  Set "yes" to strip all HTML tags.<br>
