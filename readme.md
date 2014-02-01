@@ -8,9 +8,6 @@ Copy the limit.php file to your addons/shared\_addons/plugins or addons/site\_re
 
 ## Usage
 
-
-You can either parse content in a tag pair or as a parameter called "string". The parameter will be used in case both are present.
-
 Parsing tag pair content:
 
 	{{ limit:words words="25" ending=" <a href='/read-more'>Read more</a>" }}
