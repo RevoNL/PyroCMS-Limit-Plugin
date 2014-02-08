@@ -36,12 +36,18 @@ class Plugin_Limit extends Plugin
 				'description' => array(// a single sentence to explain the purpose of this method
 					'en' => 'Limit words and add custom ending. Example: {{ limit:words words="25" ending="<a href=\'/read-more\'>Read more</a>" }}'
 				),
-				'single' => false,// will it work as a single tag?
+				'single' => true,// will it work as a single tag?
 				'double' => true,// how about as a double tag?
 				'variables' => 'This is the text you want to limit.',// list all variables available inside the double tag. Separate them|like|this
 				'attributes' => array(
 					'words' => array(// this is the name="World" attribute
 						'type' => 'number',// Can be: slug, number, flag, text, array, any.
+						'flags' => '',// flags are predefined values like asc|desc|random.
+						'default' => '',// this attribute defaults to this if no value is given
+						'required' => false,// is this attribute required?
+					),
+					'text' => array(// this is the name="World" attribute
+						'type' => 'text',// Can be: slug, number, flag, text, array, any.
 						'flags' => '',// flags are predefined values like asc|desc|random.
 						'default' => '',// this attribute defaults to this if no value is given
 						'required' => false,// is this attribute required?
@@ -83,11 +89,18 @@ class Plugin_Limit extends Plugin
 		$strip_html		= $this->attribute('strip', 'no');
 		
 		
-		$content 		= $this->content();
+		$content 		= ( ! $this->attribute('text')) ? $this->content() : $this->attribute('text');
 		
+		// Parser if text parameter
+		$parser = new Lex_Parser();
+		$parser->scope_glue(':');
+
+		$content = $parser->parse($content, array(), array($this->parser, 'parser_callback'));
+		
+		// strip html tags
 		if($strip_html == 'yes')
 		{
-			$content	= strip_tags($content);
+			$content	= preg_replace('/<[^>]*>/', '', $content);
 		}
 		
 		$new_content 	= word_limiter($content, $limit_count, $ending);
@@ -95,6 +108,7 @@ class Plugin_Limit extends Plugin
 		
  		return $new_content;
 	}
+	
 }
 
 /* End of file example.php */

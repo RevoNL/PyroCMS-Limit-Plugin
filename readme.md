@@ -8,6 +8,15 @@ Copy the limit.php file to your addons/shared\_addons/plugins or addons/site\_re
 
 ## Usage
 
+Parsing parameter 'text':
+
+	{{ limit:words text='{{ news_text }}' words='20' strip='yes' }} 
+	
+Output:
+
+	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur
+	
+
 Parsing tag pair content:
 
 	{{ limit:words words="25" ending=" <a href='/read-more'>Read more</a>" }}
@@ -22,5 +31,6 @@ Output:
 ## Parameters
 
 Words  -  The number of words you want to show<br>
+Text  -  Limit variable and set -> Strip "yes"<br>
 Ending  -  Custom ending append to the end of the text. Default = "..."<br>
 Strip  -  Set "yes" to strip all HTML tags.<br>
